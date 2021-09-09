@@ -46,15 +46,32 @@ app.post("/register", (req, res) => {
     
     console.log(newUser);
 
-   }) 
+    });
+});    
+ 
+ app.post("/login", (req, res) => {
 
-   
-});
+    const username = req.body.email ;
+    const password = req.body.password ;
+
+    Person.findOne({email: username}, (err, foundPerson) => {
+        if(err){
+            console.log(err);
+        }else{
+            if(foundPerson){
+                bcrypt.compare(password, foundPerson.password, (err, result) => {
+                    if(result === true){
+                        res.send("Badhai ho king ");
+                    }else{
+                        res.send("You are an imposter");
+                    }
+                });
+            }
+        }
+    });
 
 
-
-
-
+ });
 
 
 
