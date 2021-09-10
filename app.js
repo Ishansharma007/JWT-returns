@@ -22,7 +22,8 @@ const personSchema = new mongoose.Schema({
     last_name : String,
     age : Number,
     email : String,
-    password: String
+    password: String,
+    token: String
 });
 
 const Person = mongoose.model("Person", personSchema) ;
